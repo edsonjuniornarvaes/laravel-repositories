@@ -86,9 +86,9 @@ $ docker-compose restart
 >  DB_USERNAME=your_username
 >  DB_PASSWORD=your_password
 
-  Encontre a linha APP_URL=http://localhost
-  Altere para:
-  APP_URL=http//domain_name.test
+>  Encontre a linha APP_URL=http://localhost
+>  Altere para:
+>  APP_URL=http//domain_name.test
 
 - Siga o caminho folder_name/config/app.php
   Dentro do arquivo, encontre o timezone e altere conforme sua localidade:
