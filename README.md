@@ -73,8 +73,8 @@ $ docker-compose restart
 #### 6. DB: Crie um banco de dados
 >DB Name: db_name
 
-- Defina o charset como o mesmo do Laravel:
-  utf8mb4_unicode_ci
+> Defina o charset como o mesmo do Laravel:
+> utf8mb4_unicode_ci
 
 - Siga o caminho folder_name/.env
   Dentro do arquivo, encontre os dados de conexão com o banco de dados e faça as seguintes alterações:
