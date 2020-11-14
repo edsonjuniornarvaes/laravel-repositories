@@ -1,100 +1,100 @@
 # Laravel Framework
 
-## Configuração inicial
+## Initial setting
 
-#### 1. Laradock: Clone o repositório do laradock
+#### 1. Laradock: Clone the laradock repository
 
-```bash
+``` bash
 $ git clone https://github.com/Laradock/laradock.git
 ```
 
-#### 2. .env: Entre na pasta laradock e renomeie env-example para .env.
+#### 2. .env: Enter the laradock folder and rename env-example to .env.
 
-```bash
+``` bash
 $ cp env-example .env
 ```
 
-#### 3. Container: Suba seus containers
+#### 3. Container: Upload your containers
 
-```bash
+``` bash
 $ docker-compose up -d nginx mysql phpmyadmin
 ```
 
-## Instalando o Laravel e configurando o ambiente com Docker
+## Installing Laravel and configuring the environment with Docker
 
-#### 1. Container: Acesse o container workspace
+#### 1. Container: Access the workspace container
 
-```bash
+``` bash
 $ docker-compose exec workspace bash
 ```
 
-#### 2. Folder: Crie uma pasta para alocar os projetos
+#### 2. Folder: Create a folder to allocate projects
 
-```bash
+``` bash
 $ mkdir folder_name
 ```
 
-#### 3. Laravel: Instalar Laravel segundo a documentação
+#### 3. Laravel: Install Laravel according to the documentation
 
-```bash
-$ composer create-project --prefer-dist laravel/laravel folder_name
+``` bash
+$ composer create-project --pre-dist laravel / laravel folder_name
 ```
 
-#### 4. Domínio: Apontar domínio no navegador para abrir aplicação
+#### 4. Domain: Point domain in the browser to open application
 
-- siga o caminho -> laradock/nginx/sites/laravel.conf.example, duplique e renomeie com o mesmo nome do domínio desejado para facilitar a localização do arquivo.
-  Dentro do arquivo faça as seguintes alterações:
+- follow the path -> laradock / nginx / sites / laravel.conf.example, duplicate and rename with the same name of the desired domain to facilitate the location of the file.
+  Inside the file make the following changes:
 
->Defina o nome do seu domínio:
->Encontre a linha server_name laravel.test;
->Altere para:
->server_name domain_name.test;
+> Define your domain name:
+> Find the server_name laravel.test line;
+> Change to:
+> server_name domain_name.test;
 
->Defina o caminho de sua aplicação:
->Encontre a linha root /var/www/laravel/public;
->Altere para:
->root /var/www/folder_name/folder_name/public;
+> Define your application path:
+> Find the line root / var / www / laravel / public;
+> Change to:
+> root / var / www / folder_name / folder_name / public;
 
-#### 5. Container: Reinicie os containers para realizar a leitura do arquivo que acabou de modificar
+#### 5. Container: Restart the containers to read the file you just modified
 
-```bash
+``` bash
 $ docker-compose restart
 ```
 
-#### 6. Domínio: Definir que o domínio apontado no navegador direcione para o próprio host
-- Windows: siga o caminho -> C:> Windows > System32 > drivers > etc > hosts
-  Linux: siga o caminho -> etc > hosts 
-  Mac: siga o caminho -> etc > hosts 
-  Dentro do arquivo faça as seguitnes alterações:
+#### 6. Domain: Set the domain pointed to in the browser to direct to the host itself
+- Windows: follow the path -> C:> Windows> System32> drivers> etc> hosts
+  Linux: follow the path -> etc> hosts
+  Mac: follow the path -> etc> hosts
+  Inside the file, make the following changes:
 
->No final do arquivo defina o ip de sua máquina:
->127.0.0.1 domain_name.test 
+> At the end of the file, set your machine's ip:
+> 127.0.0.1 domain_name.test
 
-#### 6. DB: Crie um banco de dados
->DB Name: db_name
+#### 6. DB: Create a database
+> DB Name: db_name
 
-> Defina o charset como o mesmo do Laravel:
+> Set the charset to the same as Laravel:
 > utf8mb4_unicode_ci
 
-- Siga o caminho folder_name/.env
-  Dentro do arquivo, encontre os dados de conexão com o banco de dados e faça as seguintes alterações:
+- Follow the path folder_name / .env
+  Inside the file, find the connection data to the database and make the following changes:
 
->  DB_CONNECTION=mysql
->  DB_HOST=mysql
->  DB_PORT=3306
->  DB_DATABASE=db_name
->  DB_USERNAME=your_username
->  DB_PASSWORD=your_password
+> DB_CONNECTION = mysql
+> DB_HOST = mysql
+> DB_PORT = 3306
+> DB_DATABASE = db_name
+> DB_USERNAME = your_username
+> DB_PASSWORD = your_password
 
->  Encontre a linha APP_URL=http://localhost
->  Altere para:
->  APP_URL=http//domain_name.test
+> Find the line APP_URL = http: // localhost
+> Change to:
+> APP_URL = http // domain_name.test
 
-- Siga o caminho folder_name/config/app.php
-  Dentro do arquivo, encontre o timezone e altere conforme sua localidade:
+- Follow the path folder_name / config / app.php
+  Inside the file, find the timezone and change it according to your location:
 
- > Encontre a linha 'timezone' => 'UTC'
- > Altere para:
- > 'timezone' => 'America/Sao_Paulo'
+ > Find the line 'timezone' => 'UTC'
+ > Change to:
+ > 'timezone' => 'America / Sao_Paulo'
 
 - Edson Junior de Andrade Narvaes.
