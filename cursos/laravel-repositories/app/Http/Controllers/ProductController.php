@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreUpdateProductRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -22,13 +23,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $teste = '123';
-        $teste2 = 'teste 2';
-        $teste3 = [1,2,3,4,5];
-        $products = ['Tv','Geladeira','Forno','Sofá'];
+    { 
+        $products = Product::latest()->paginate();
 
-        return view('admin.pages.products.index', compact('teste'));
+        return view('admin.pages.products.index', [
+            'products' => $products,
+        ]);
     }
 
     /**
