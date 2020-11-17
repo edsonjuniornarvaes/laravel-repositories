@@ -5,14 +5,14 @@
 @section('content')
 
     <h1>Exibindo os produtos</h1>
-    <a href="{{ route('products.create') }}">Cadastrar</a>
-    <hr>
-    <table border="1">
+    <a href="{{ route('products.create') }}" class="btn btn-primary">Cadastrar</a>
+    
+    <table class="table table-hover" border="1">
         <thead>
             <tr>
                 <th>Nome</th>
                 <th>Preço</th>
-                <th>Ações</th>
+                <th width="100">Ações</th>
             </tr>  
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
-                        <a href="">Detalhes</a>
+                        <a href="{{ route('products.show', $product->id) }}">Detalhes</a>
                     </td>
                 </tr>
             @endforeach

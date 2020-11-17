@@ -49,23 +49,11 @@ class ProductController extends Controller
      */
     public function store(StoreUpdateProductRequest $request)
     {
-        // $request->validate([
-        //     'name' => 'required|min:3|max:255',
-        //     'description' => 'nullable|min:3|max:10000',
-        //     'photo' => 'required|image',
-        // ]);
+        $data = $request->only('name', 'description', 'price');
 
-        //dd($request->all());
-        //dd($request->only(['name', 'description']));
-        //dd($request->name());
-        //dd($request->input(['teste', 'default']));
-        //dd($request->all('_token', 'name'));
-        
-        if ($request->file('photo')->isValid()) {
-            //dd($request->file('photo')->store('products'));
-            $nameFile = $request->name . '.' . $request->photo->extension();
-            dd($request->file('photo')->storeAs('products', $nameFile));
-        }
+        Product::create($data);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -76,7 +64,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return "Detalhes do produto: {$id}";
+        if (!$product = Product::find($id))
+            return redirect()->back; 
+
+        return view('admin.pages.products.show', [
+            'product' => $product
+        ]);
     }
 
     /**
