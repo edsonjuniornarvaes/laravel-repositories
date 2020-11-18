@@ -9,10 +9,12 @@ class ProductController extends Controller
 {
 
     protected $request;
+    private $repository;
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Product $product)
     {
         $this->request = $request;
+        $this->repository = $product;
         // $this->middleware('auth')->only(['create', 'store']);
         // $this->middleware('auth')->except(['index', 'show']);
     }
@@ -51,7 +53,7 @@ class ProductController extends Controller
     {
         $data = $request->only('name', 'description', 'price');
 
-        Product::create($data);
+        $this->repository->create($data);
 
         return redirect()->route('products.index');
     }
@@ -64,8 +66,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        if (!$product = Product::find($id))
-            return redirect()->back; 
+        if (!$product = $this->repository->find($id)) return redirect()->back; 
 
         return view('admin.pages.products.show', [
             'product' => $product
@@ -80,19 +81,24 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        if (!$product = $this->repository->find($id)) return redirect()->back; 
+
         return view('admin.pages.products.edit', compact('id')); 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateProductRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateProductRequest $request, $id)
     {
-        dd('Editando o produto');
+        if (!$product = $this->repository->find($id)) return redirect()->back; 
+        $product->update($request->all());
+        
+        return redirect()->route('produts.index');
     }
 
     /**
@@ -103,6 +109,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this->repository->where('id', $id)->first();
+
+        if (!$product) return redirect()->back; 
+
+        $product->delete();
+
+        return redirect()->route('products.index');
     }
 }
