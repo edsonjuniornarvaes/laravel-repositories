@@ -1,6 +1,6 @@
 # Laravel Framework
 
-## Initial setting
+### Initial setting
 
 #### 1. Laradock: Clone the laradock repository
 
