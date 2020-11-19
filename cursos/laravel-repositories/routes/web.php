@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('products/search', 'ProductController@search')->name('products.search')/*->middleware('auth')*/;
-Route::resource('products', 'ProductController')->middleware('auth')/*->middleware(['auth', 'check.is.admin'])*/;
+Route::resource('products', 'ProductController')->middleware('auth')->middleware(['auth', 'check.is.admin']);
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,5 +25,3 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes(['register' => false]);
-
-Route::get('/home', 'HomeController@index')->name('home');
